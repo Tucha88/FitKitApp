@@ -34,7 +34,7 @@ public abstract class Person {
     @Column(name = "AVATAR")
     private String avatar;
     @JoinColumn(name = "GYM_ID")
-//    @OneToOne
+    @OneToOne
     private Gym gym;
 
     public Person() {

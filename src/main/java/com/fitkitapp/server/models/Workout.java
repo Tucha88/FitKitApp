@@ -23,15 +23,15 @@ public class Workout {
     private String author;
     @Column(name = "WORKOUT_TYPE")
     private WorkoutType workoutType;
-//    @OneToMany(mappedBy = "owner")
-//    @MapKeyJoinColumn(name = "EXERCISE_ID")
-//    private Map<Exercise, SRWD> exerciseMap = new HashMap<>();
+    @OneToMany(mappedBy = "owner")
+    @MapKeyJoinColumn(name = "EXERCISE_ID")
+    private Map<Exercise, SRWD> exerciseMap = new HashMap<>();
 
     public Workout() {
     }
 
     public Workout(String icon, String name, String description, String note, String author,
-                   WorkoutType workoutType/*, Map<Exercise, SRWD> exerciseMap*/) {
+                   WorkoutType workoutType, Map<Exercise, SRWD> exerciseMap) {
 
         this.icon = icon;
         this.name = name;
@@ -39,7 +39,7 @@ public class Workout {
         this.note = note;
         this.author = author;
         this.workoutType = workoutType;
-//        this.exerciseMap = exerciseMap;
+        this.exerciseMap = exerciseMap;
     }
 
     public Long getId() {
@@ -99,11 +99,11 @@ public class Workout {
         this.workoutType = workoutType;
     }
 
-//    public Map<Exercise, SRWD> getExerciseMap() {
-//        return exerciseMap;
-//    }
-//
-//    public void setExerciseMap(Map<Exercise, SRWD> exerciseMap) {
-//        this.exerciseMap = exerciseMap;
-//    }
+    public Map<Exercise, SRWD> getExerciseMap() {
+        return exerciseMap;
+    }
+
+    public void setExerciseMap(Map<Exercise, SRWD> exerciseMap) {
+        this.exerciseMap = exerciseMap;
+    }
 }

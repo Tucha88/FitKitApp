@@ -19,13 +19,13 @@ public class Client extends Person {
     private Status status;
     @JoinColumn(name = "ABONEMENT_ID")
     private Abonnement abonnement;
-//    @OneToMany
+    @OneToMany
     @JoinColumn(name = "PERSONAL_WORKOUT")
     private ArrayList<Workout> personalWorkout;
-//    @OneToMany
+    @OneToMany
     @JoinColumn(name = "BY_COACH_WORKOUT")
     private ArrayList<Workout> byCoachWorkout;
-//    @OneToMany
+    @OneToMany
     @JoinColumn(name = "STANDARD_WORKOUT")
     private ArrayList<Workout> standardWorkout;
 

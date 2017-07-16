@@ -15,16 +15,16 @@ public class Gym {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
-//    @OneToMany
+    @OneToMany
     @JoinColumn(name = "EMPLOYEES_ID")
     private ArrayList<Employees> employees = new ArrayList<>();
-//    @OneToMany
+    @OneToMany
     @JoinColumn(name = "CLIENTS_ID")
     private ArrayList<Client> clients = new ArrayList<>();
-//    @OneToMany
+    @OneToMany
     @JoinColumn(name = "ABONNEMENTS_ID")
     private ArrayList<Abonnement> abonnements = new ArrayList<>();
-//    @OneToMany
+    @OneToMany
     @JoinColumn(name = "POSTS_ID")
     private ArrayList<Post> posts = new ArrayList<>();
     @Column(name = "Permissions")

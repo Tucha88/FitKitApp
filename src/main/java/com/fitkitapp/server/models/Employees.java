@@ -20,7 +20,7 @@ public class Employees extends Person {
     private Role role;
     @JoinColumn(name = "PERMISSIONS_IDS")
     private ArrayList<Permission> permissions;
-//    @ManyToMany
+    @ManyToMany
     @JoinColumn(name = "CLIENTS_IDS")
     private ArrayList<Client> clients = new ArrayList<>();
     @JoinColumn(name = "SPECIALIZATION_ID")

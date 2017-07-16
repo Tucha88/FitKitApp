@@ -16,7 +16,7 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long companyId;
     @Column
-//    @OneToMany
+    @OneToMany
     @JoinColumn(name = "GYMS_ID")
     private ArrayList<Gym> gyms;
     @Column(name = "COMPANY_NAME")
