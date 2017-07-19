@@ -1,7 +1,9 @@
 package com.fitkitapp.server.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -12,34 +14,41 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "Employees")
-public class Employees extends Person {
+public class Employees extends Person implements Serializable {
+    private static final long serialVersionUID = 4L;
+
     @Id
     @GeneratedValue
     private Long id;
-    @Column(name = "ROLE")
+    @OneToOne
     private Role role;
-    @JoinColumn(name = "PERMISSIONS_IDS")
-    private ArrayList<Permission> permissions;
-    @ManyToMany
-    @JoinColumn(name = "CLIENTS_IDS")
-    private ArrayList<Client> clients = new ArrayList<>();
-    @JoinColumn(name = "SPECIALIZATION_ID")
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<Permission> permissions;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<Client> clients = new ArrayList<>();
+    @ManyToOne
     private Specialization specialization;
     private String aboutMe;
 
     public Employees() {
     }
 
-    public Employees(String firstName, String lastName, Gender gender, String login, String password,
-                     String email, String phoneNumber, Date dateOfBirth, String avatar, Gym gym,
-                     Role role, ArrayList<Permission> permissions, String aboutMe, ArrayList<Client> clients,
-                     Specialization specialization) {
+    public Employees(Role role, Collection<Permission> permissions, Collection<Client> clients, Specialization specialization, String aboutMe) {
+
+        this.role = role;
+        this.permissions = permissions;
+        this.clients = clients;
+        this.specialization = specialization;
+        this.aboutMe = aboutMe;
+    }
+
+    public Employees(String firstName, String lastName, Gender gender, String login, String password, String email, String phoneNumber, Date dateOfBirth, String avatar, Gym gym, Role role, Collection<Permission> permissions, Collection<Client> clients, Specialization specialization, String aboutMe) {
         super(firstName, lastName, gender, login, password, email, phoneNumber, dateOfBirth, avatar, gym);
         this.role = role;
         this.permissions = permissions;
-        this.aboutMe = aboutMe;
         this.clients = clients;
         this.specialization = specialization;
+        this.aboutMe = aboutMe;
     }
 
     public Long getId() {
@@ -59,27 +68,19 @@ public class Employees extends Person {
         this.role = role;
     }
 
-    public ArrayList<Permission> getPermissions() {
+    public Collection<Permission> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(ArrayList<Permission> permissions) {
+    public void setPermissions(Collection<Permission> permissions) {
         this.permissions = permissions;
     }
 
-    public String getAboutMe() {
-        return aboutMe;
-    }
-
-    public void setAboutMe(String aboutMe) {
-        this.aboutMe = aboutMe;
-    }
-
-    public ArrayList<Client> getClients() {
+    public Collection<Client> getClients() {
         return clients;
     }
 
-    public void setClients(ArrayList<Client> clients) {
+    public void setClients(Collection<Client> clients) {
         this.clients = clients;
     }
 
@@ -89,5 +90,13 @@ public class Employees extends Person {
 
     public void setSpecialization(Specialization specialization) {
         this.specialization = specialization;
+    }
+
+    public String getAboutMe() {
+        return aboutMe;
+    }
+
+    public void setAboutMe(String aboutMe) {
+        this.aboutMe = aboutMe;
     }
 }

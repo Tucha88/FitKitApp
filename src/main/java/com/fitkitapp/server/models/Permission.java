@@ -1,6 +1,7 @@
 package com.fitkitapp.server.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created on 10.07.2017.
@@ -9,7 +10,9 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "Permissions")
-public class Permission {
+public class Permission implements Serializable {
+    private static final long serialVersionUID = 8L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

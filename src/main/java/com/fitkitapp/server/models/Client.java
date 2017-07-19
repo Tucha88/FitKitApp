@@ -1,7 +1,8 @@
 package com.fitkitapp.server.models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -11,32 +12,37 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "Client")
-public class Client extends Person {
+public class Client extends Person implements Serializable {
+
+    private static final long serialVersionUID = 2L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @JoinColumn(name = "STATUS_ID")
+    @OneToOne
     private Status status;
-    @JoinColumn(name = "ABONEMENT_ID")
+    @OneToOne
     private Abonnement abonnement;
-    @OneToMany
-    @JoinColumn(name = "PERSONAL_WORKOUT")
-    private ArrayList<Workout> personalWorkout;
-    @OneToMany
-    @JoinColumn(name = "BY_COACH_WORKOUT")
-    private ArrayList<Workout> byCoachWorkout;
-    @OneToMany
-    @JoinColumn(name = "STANDARD_WORKOUT")
-    private ArrayList<Workout> standardWorkout;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<Workout> personalWorkout;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<Workout> byCoachWorkout;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<Workout> standardWorkout;
+
 
     public Client() {
     }
 
+    public Client(Status status, Abonnement abonnement, Collection<Workout> personalWorkout, Collection<Workout> byCoachWorkout, Collection<Workout> standardWorkout) {
+        this.status = status;
+        this.abonnement = abonnement;
+        this.personalWorkout = personalWorkout;
+        this.byCoachWorkout = byCoachWorkout;
+        this.standardWorkout = standardWorkout;
+    }
 
-    public Client(String firstName, String lastName, Gender gender, String login, String password,
-                  String email, String phoneNumber, Date dateOfBirth, String avatar, Gym gym,
-                  Status status, Abonnement abonnement, ArrayList<Workout> personalWorkout,
-                  ArrayList<Workout> byCoachWorkout, ArrayList<Workout> standardWorkout) {
+    public Client(String firstName, String lastName, Gender gender, String login, String password, String email, String phoneNumber, Date dateOfBirth, String avatar, Gym gym, Status status, Abonnement abonnement, Collection<Workout> personalWorkout, Collection<Workout> byCoachWorkout, Collection<Workout> standardWorkout) {
         super(firstName, lastName, gender, login, password, email, phoneNumber, dateOfBirth, avatar, gym);
         this.status = status;
         this.abonnement = abonnement;
@@ -70,27 +76,27 @@ public class Client extends Person {
         this.abonnement = abonnement;
     }
 
-    public ArrayList<Workout> getPersonalWorkout() {
+    public Collection<Workout> getPersonalWorkout() {
         return personalWorkout;
     }
 
-    public void setPersonalWorkout(ArrayList<Workout> personalWorkout) {
+    public void setPersonalWorkout(Collection<Workout> personalWorkout) {
         this.personalWorkout = personalWorkout;
     }
 
-    public ArrayList<Workout> getByCoachWorkout() {
+    public Collection<Workout> getByCoachWorkout() {
         return byCoachWorkout;
     }
 
-    public void setByCoachWorkout(ArrayList<Workout> byCoachWorkout) {
+    public void setByCoachWorkout(Collection<Workout> byCoachWorkout) {
         this.byCoachWorkout = byCoachWorkout;
     }
 
-    public ArrayList<Workout> getStandardWorkout() {
+    public Collection<Workout> getStandardWorkout() {
         return standardWorkout;
     }
 
-    public void setStandardWorkout(ArrayList<Workout> standardWorkout) {
+    public void setStandardWorkout(Collection<Workout> standardWorkout) {
         this.standardWorkout = standardWorkout;
     }
 }

@@ -4,6 +4,7 @@ import com.fitkitapp.server.models.Company;
 import com.fitkitapp.server.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,13 +13,21 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @CrossOrigin
-@RequestMapping(name = "company")
+@RequestMapping("company")
 public class CompanyController {
 
-    @Autowired
-    private CompanyService companyService;
+    private final CompanyService companyService;
 
-    @RequestMapping(value = "register",method = RequestMethod.POST)
+    @Autowired
+    public CompanyController(CompanyService companyService) {
+        this.companyService = companyService;
+    }
+
+    @RequestMapping(value = "/reg",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public ResponseEntity<Company> createNewCompany(@RequestBody Company company){
         return new ResponseEntity<>(companyService.createNewCompany(company), HttpStatus.OK);
     }

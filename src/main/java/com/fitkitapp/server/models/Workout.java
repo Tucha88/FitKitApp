@@ -1,7 +1,7 @@
 package com.fitkitapp.server.models;
 
 import javax.persistence.*;
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -12,20 +12,29 @@ import java.util.Map;
  */
 @Entity
 @Table(name = "Workout")
-public class Workout {
+public class Workout implements Serializable {
+    private static final long serialVersionUID = 15L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String icon;
+
     private String name;
+
     private String description;
+
     private String note;
+
     private String author;
+
     @Column(name = "WORKOUT_TYPE")
     private WorkoutType workoutType;
-    @OneToMany(mappedBy = "owner")
-    @MapKeyJoinColumn(name = "EXERCISE_ID")
-    private Map<Exercise, SRWD> exerciseMap = new HashMap<>();
+//
+//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//    @MapKeyJoinColumn(name = "EXERCISE_ID")
+//    private Map<Exercise, SRWD> exerciseMap = new HashMap<>();
 
     public Workout() {
     }
@@ -39,7 +48,7 @@ public class Workout {
         this.note = note;
         this.author = author;
         this.workoutType = workoutType;
-        this.exerciseMap = exerciseMap;
+//        this.exerciseMap = exerciseMap;
     }
 
     public Long getId() {
@@ -99,11 +108,11 @@ public class Workout {
         this.workoutType = workoutType;
     }
 
-    public Map<Exercise, SRWD> getExerciseMap() {
-        return exerciseMap;
-    }
-
-    public void setExerciseMap(Map<Exercise, SRWD> exerciseMap) {
-        this.exerciseMap = exerciseMap;
-    }
+//    public Map<Exercise, SRWD> getExerciseMap() {
+//        return exerciseMap;
+//    }
+//
+//    public void setExerciseMap(Map<Exercise, SRWD> exerciseMap) {
+//        this.exerciseMap = exerciseMap;
+//    }
 }

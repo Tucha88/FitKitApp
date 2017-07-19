@@ -4,6 +4,7 @@ import com.fitkitapp.server.util.FitKitAppConstants;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 @MappedSuperclass
 /**
@@ -11,30 +12,39 @@ import java.util.Date;
  * <p>Person class</p>
  * @author boris
  */
-public abstract class Person {
+public abstract class Person implements Serializable {
+    private static final long serialVersionUID = 9L;
+
 
     @Column(name = "FIRST_NAME")
     private String firstName;
+
     @Column(name = "LAST_NAME")
     private String lastName;
+
     @Column(name = "GENDER")
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
     @Column(name = "LOGIN")
     private String login;
+
     @Column(name = "PASSWORD")
     private String password;
+
     @Column(name = "EMAIL")
     private String email;
+
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
+
     @Column(name = "DATE_OF_BIRTH")
     @DateTimeFormat(pattern = FitKitAppConstants.DATE_FORMAT)
     private Date dateOfBirth;
+
     @Column(name = "AVATAR")
     private String avatar;
-    @JoinColumn(name = "GYM_ID")
-    @OneToOne
+    @ManyToOne
     private Gym gym;
 
     public Person() {

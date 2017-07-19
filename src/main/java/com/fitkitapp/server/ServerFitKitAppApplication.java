@@ -9,4 +9,6 @@ public class ServerFitKitAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ServerFitKitAppApplication.class, args);
 	}
+
+
 }

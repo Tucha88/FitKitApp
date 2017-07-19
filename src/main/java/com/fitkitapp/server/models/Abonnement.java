@@ -4,6 +4,7 @@ import com.fitkitapp.server.util.FitKitAppConstants;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,15 +15,22 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "Abonnement")
-public class Abonnement {
+public class Abonnement implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
+
     @DateTimeFormat(pattern = FitKitAppConstants.DATE_FORMAT)
     private Date dateOfRegistration;
+
     @DateTimeFormat(pattern = FitKitAppConstants.DATE_FORMAT)
     private Date dateOfExpiration;
+
     private Boolean Active;
 
     public Abonnement() {

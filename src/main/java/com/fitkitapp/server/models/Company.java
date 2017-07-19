@@ -1,7 +1,8 @@
 package com.fitkitapp.server.models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.Collection;
 
 /**
  * Created on 10.07.2017.
@@ -11,42 +12,46 @@ import java.util.ArrayList;
  */
 @Entity
 @Table(name = "Company")
-public class Company {
+public class Company implements Serializable {
+
+    private static final long serialVersionUID = 111111113L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long companyId;
-    @Column
-    @OneToMany
-    @JoinColumn(name = "GYMS_ID")
-    private ArrayList<Gym> gyms;
+    private Long id;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<Gym> gyms;
+
     @Column(name = "COMPANY_NAME")
     private String companyName;
+
     private String password;
 
     public Company() {
     }
 
-    public Company(ArrayList<Gym> gyms, String companyName, String password) {
+    public Company(Collection<Gym> gyms, String companyName, String password) {
 
         this.gyms = gyms;
         this.companyName = companyName;
         this.password = password;
     }
 
-    public Long getCompanyId() {
+    public Long getId() {
 
-        return companyId;
+        return id;
     }
 
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public ArrayList<Gym> getGyms() {
+    public Collection<Gym> getGyms() {
         return gyms;
     }
 
-    public void setGyms(ArrayList<Gym> gyms) {
+    public void setGyms(Collection<Gym> gyms) {
         this.gyms = gyms;
     }
 

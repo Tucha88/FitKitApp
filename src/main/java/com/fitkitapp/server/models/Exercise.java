@@ -2,6 +2,7 @@ package com.fitkitapp.server.models;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +12,9 @@ import java.util.ArrayList;
  */
 @Entity
 @Table(name = "Exercises")
-public class Exercise {
+public class Exercise implements Serializable {
+    private static final long serialVersionUID = 5L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

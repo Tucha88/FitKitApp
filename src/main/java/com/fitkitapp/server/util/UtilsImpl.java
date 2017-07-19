@@ -4,12 +4,14 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 /**
  * Created by Boris on 16.07.2017.
  */
+@Service
 public class UtilsImpl implements Utils {
 
 

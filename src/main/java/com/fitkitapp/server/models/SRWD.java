@@ -5,6 +5,7 @@ package com.fitkitapp.server.models;
  */
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created on 14.07.2017.
@@ -14,15 +15,22 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "SRWD")
-public class SRWD {
+public class SRWD implements Serializable {
+    private static final long serialVersionUID = 13L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private int sets;
+
     private int reps;
+
     private String weight;
+
     private String duration;
+
 
     public SRWD() {
     }

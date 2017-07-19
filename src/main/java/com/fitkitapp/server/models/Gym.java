@@ -1,7 +1,9 @@
 package com.fitkitapp.server.models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.Collection;
+
 /**
  * Created on 10.07.2017.
  * <p>Gym class</p>
@@ -9,34 +11,42 @@ import java.util.ArrayList;
  */
 @Entity
 @Table(name = "Gym")
-public class Gym {
+public class Gym implements Serializable {
+    private static final long serialVersionUID = 111111117L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
-    @OneToMany
-    @JoinColumn(name = "EMPLOYEES_ID")
-    private ArrayList<Employees> employees = new ArrayList<>();
-    @OneToMany
-    @JoinColumn(name = "CLIENTS_ID")
-    private ArrayList<Client> clients = new ArrayList<>();
-    @OneToMany
-    @JoinColumn(name = "ABONNEMENTS_ID")
-    private ArrayList<Abonnement> abonnements = new ArrayList<>();
-    @OneToMany
-    @JoinColumn(name = "POSTS_ID")
-    private ArrayList<Post> posts = new ArrayList<>();
-    @Column(name = "Permissions")
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<Employees> employees;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<Client> clients;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<Abonnement> abonnements;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<Post> posts;
+
+    @ManyToOne
     private Permission permission;
-    @JoinColumn(name = "FULL_INFO_ID")
+
+    @OneToOne
     private FullInfo fullInfo;
+
+    @ManyToOne
+    @JoinColumn(name = "company", referencedColumnName = "ID")
+    private Company company;
+
 
     public Gym() {
     }
 
-    public Gym(ArrayList<Employees> employees, ArrayList<Client> clients, ArrayList<Abonnement> abonnements,
-               ArrayList<Post> posts, Permission permission, FullInfo fullInfo) {
+    public Gym(Collection<Employees> employees, Collection<Client> clients, Collection<Abonnement> abonnements, Collection<Post> posts, Permission permission, FullInfo fullInfo, Company company) {
 
         this.employees = employees;
         this.clients = clients;
@@ -44,6 +54,7 @@ public class Gym {
         this.posts = posts;
         this.permission = permission;
         this.fullInfo = fullInfo;
+        this.company = company;
     }
 
     public Long getId() {
@@ -55,35 +66,35 @@ public class Gym {
         this.id = id;
     }
 
-    public ArrayList<Employees> getEmployees() {
+    public Collection<Employees> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(ArrayList<Employees> employees) {
+    public void setEmployees(Collection<Employees> employees) {
         this.employees = employees;
     }
 
-    public ArrayList<Client> getClients() {
+    public Collection<Client> getClients() {
         return clients;
     }
 
-    public void setClients(ArrayList<Client> clients) {
+    public void setClients(Collection<Client> clients) {
         this.clients = clients;
     }
 
-    public ArrayList<Abonnement> getAbonnements() {
+    public Collection<Abonnement> getAbonnements() {
         return abonnements;
     }
 
-    public void setAbonnements(ArrayList<Abonnement> abonnements) {
+    public void setAbonnements(Collection<Abonnement> abonnements) {
         this.abonnements = abonnements;
     }
 
-    public ArrayList<Post> getPosts() {
+    public Collection<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(ArrayList<Post> posts) {
+    public void setPosts(Collection<Post> posts) {
         this.posts = posts;
     }
 
@@ -101,5 +112,13 @@ public class Gym {
 
     public void setFullInfo(FullInfo fullInfo) {
         this.fullInfo = fullInfo;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

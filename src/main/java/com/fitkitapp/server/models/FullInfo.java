@@ -1,6 +1,10 @@
 package com.fitkitapp.server.models;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * Created on 10.07.2017.
@@ -9,11 +13,12 @@ import javax.persistence.*;
  * @author boris
  */
 @Entity
-@Table(name = "FullInfo")
-public class FullInfo {
+public class FullInfo implements Serializable {
+    private static final long serialVersionUID = 6L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long fullInfoId;
+    private Long id;
     private String address;
     private String workingHours;
     private String description;
@@ -28,13 +33,13 @@ public class FullInfo {
         this.description = description;
     }
 
-    public Long getFullInfoId() {
+    public Long getId() {
 
-        return fullInfoId;
+        return id;
     }
 
-    public void setFullInfoId(Long fullInfoId) {
-        this.fullInfoId = fullInfoId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getAddress() {

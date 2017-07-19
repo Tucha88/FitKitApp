@@ -4,6 +4,7 @@ import com.fitkitapp.server.util.FitKitAppConstants;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,7 +15,9 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "Post")
-public class Post {
+public class Post implements Serializable {
+    private static final long serialVersionUID = 10L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -26,20 +29,30 @@ public class Post {
      */
     @Column(name = "TYPE")
     private Boolean targetStatus;
+
     private String targetIcon;
+
     @DateTimeFormat(pattern = FitKitAppConstants.DATE_FORMAT)
     @Column(name = "DATE_OF_CREATION")
     private Date dateOfCreation;
+
     @DateTimeFormat(pattern = FitKitAppConstants.DATE_FORMAT)
     @Column(name = "DATE_OF_PUBLICATION")
     private Date dateOfPublication;
-    @JoinColumn(name = "GYM_ID")
+
+    @ManyToOne
     private Gym gym;
+
     private String title;
+
     private String body;
+
     private String author;
+
     private String externalURL;
+
     private int likes;
+
     private String imges;
 
     public Post() {
