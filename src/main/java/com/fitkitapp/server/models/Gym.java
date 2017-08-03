@@ -2,6 +2,7 @@ package com.fitkitapp.server.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -21,24 +22,24 @@ public class Gym implements Serializable {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<Employees> employees;
+    private Collection<Employees> employees = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<Client> clients;
+    private Collection<Client> clients = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<Abonnement> abonnements;
+    private Collection<Abonnement> abonnements = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<Post> posts;
+    private Collection<Post> posts = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Permission permission;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private FullInfo fullInfo;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "company", referencedColumnName = "ID")
     private Company company;
 

@@ -11,31 +11,38 @@ import java.util.ArrayList;
  * @author boris
  */
 @Entity
-@Table(name = "Exercises")
-public class Exercise implements Serializable {
+@Table
+public class Exercise implements Serializable, Comparable<Exercise> {
     private static final long serialVersionUID = 5L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
     private String name;
     private String description;
     private String category;
-    private ArrayList<String> images;
+    private ArrayList<String> images = new ArrayList<>();
+    @ManyToOne
+    private Workout owner;
 
     public Exercise() {
     }
 
-    public Exercise(String name, String description, String category, ArrayList<String> images) {
-
+    public Exercise(String name, String description, String category, ArrayList<String> images, Workout owner) {
         this.name = name;
         this.description = description;
         this.category = category;
         this.images = images;
+        this.owner = owner;
+    }
+
+    public static long getSerialVersionUID() {
+
+        return serialVersionUID;
     }
 
     public Long getId() {
-
         return id;
     }
 
@@ -75,9 +82,17 @@ public class Exercise implements Serializable {
         this.images = images;
     }
 
+    public Workout getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Workout owner) {
+        this.owner = owner;
+    }
+
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return name.hashCode();
     }
 
     @Override
@@ -89,5 +104,13 @@ public class Exercise implements Serializable {
            }
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(Exercise o) {
+        if (this.name.equals(o.getName()) && this.category.equals(o.getCategory())) {
+            return 1;
+        }
+        return 0;
     }
 }

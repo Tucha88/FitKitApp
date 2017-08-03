@@ -31,9 +31,9 @@ public class Workout implements Serializable {
 
     @Column(name = "WORKOUT_TYPE")
     private WorkoutType workoutType;
-//
-//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-//    @MapKeyJoinColumn(name = "EXERCISE_ID")
+
+//    @OneToMany
+//    @MapKeyJoinColumn(name = "EXERCISES_ID")
 //    private Map<Exercise, SRWD> exerciseMap = new HashMap<>();
 
     public Workout() {

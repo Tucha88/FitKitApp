@@ -2,6 +2,7 @@ package com.fitkitapp.server.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -21,7 +22,7 @@ public class Company implements Serializable {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<Gym> gyms;
+    private Collection<Gym> gyms = new ArrayList<>();
 
     @Column(name = "COMPANY_NAME")
     private String companyName;
@@ -69,5 +70,9 @@ public class Company implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void addGym(Gym gym) {
+        this.gyms.add(gym);
     }
 }

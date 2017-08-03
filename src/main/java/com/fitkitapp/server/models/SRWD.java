@@ -21,6 +21,7 @@ public class SRWD implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
 
     private int sets;

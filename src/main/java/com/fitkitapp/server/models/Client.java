@@ -2,6 +2,7 @@ package com.fitkitapp.server.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -24,11 +25,11 @@ public class Client extends Person implements Serializable {
     @OneToOne
     private Abonnement abonnement;
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<Workout> personalWorkout;
+    private Collection<Workout> personalWorkout = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<Workout> byCoachWorkout;
+    private Collection<Workout> byCoachWorkout = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<Workout> standardWorkout;
+    private Collection<Workout> standardWorkout = new ArrayList<>();
 
 
     public Client() {

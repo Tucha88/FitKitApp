@@ -23,7 +23,7 @@ public class Employees extends Person implements Serializable {
     @OneToOne
     private Role role;
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<Permission> permissions;
+    private Collection<Permission> permissions = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL)
     private Collection<Client> clients = new ArrayList<>();
     @ManyToOne
