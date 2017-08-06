@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+
 /**
  * Created by Boris on 16.07.2017.
  */
@@ -53,8 +55,23 @@ public class CompanyServiceImpl implements CompanyService {
             return null;
         }
         companyFind.addGym(gym);
+/*
         gym.setCompany(companyFind);
+*/
         companyRepo.saveAndFlush(companyFind);
         return gym;
+    }
+
+    @Override
+    public Gym findGymById(Long id) {
+
+        return gymRepo.findGymById(id);
+    }
+
+    @Override
+    public ArrayList<Gym> getAllGyms(String companyName) {
+        ArrayList<Gym> gyms = new ArrayList<>();
+        gyms.addAll(companyRepo.findByCompanyName(companyName).getGyms());
+        return gyms;
     }
 }

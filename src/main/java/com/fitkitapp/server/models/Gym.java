@@ -1,5 +1,8 @@
 package com.fitkitapp.server.models;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fitkitapp.server.util.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,7 +15,7 @@ import java.util.Collection;
  */
 @Entity
 @Table(name = "Gym")
-public class Gym implements Serializable {
+public class Gym implements Serializable, Comparable<Gym> {
     private static final long serialVersionUID = 111111117L;
 
 
@@ -22,15 +25,19 @@ public class Gym implements Serializable {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonSerialize(converter = ListEmployeesConverter.class)
     private Collection<Employees> employees = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonSerialize(converter = ListClientConverter.class)
     private Collection<Client> clients = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonSerialize(converter = ListAbonnementsConverter.class)
     private Collection<Abonnement> abonnements = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonSerialize(converter = ListPostsConvernter.class)
     private Collection<Post> posts = new ArrayList<>();
 
     @ManyToOne(cascade = {CascadeType.ALL})
@@ -41,13 +48,15 @@ public class Gym implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "company", referencedColumnName = "ID")
+    @JsonSerialize(converter = CompanyConverner.class)
     private Company company;
 
 
     public Gym() {
     }
 
-    public Gym(Collection<Employees> employees, Collection<Client> clients, Collection<Abonnement> abonnements, Collection<Post> posts, Permission permission, FullInfo fullInfo, Company company) {
+    public Gym(Collection<Employees> employees, Collection<Client> clients, Collection<Abonnement> abonnements,
+               Collection<Post> posts, Permission permission, FullInfo fullInfo, Company company) {
 
         this.employees = employees;
         this.clients = clients;
@@ -121,5 +130,19 @@ public class Gym implements Serializable {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Gym gym = obj instanceof Gym ? (Gym) obj : null;
+        if (gym == null) {
+            return false;
+        }
+        return gym.getId() == this.getId();
+    }
+
+    @Override
+    public int compareTo(Gym o) {
+        return o.getId() == this.getId() ? 0 : 1;
     }
 }

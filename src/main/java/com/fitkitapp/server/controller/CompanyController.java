@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 /**
  * Created on 16.07.2017
  * @author boris
@@ -42,6 +44,7 @@ public class CompanyController {
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
+
     @PostMapping("/gym")
     public ResponseEntity<Object> createNewGym(@RequestHeader("authorization") String token, @RequestBody FullInfo gym) {
         Gym newGym = new Gym();
@@ -49,5 +52,20 @@ public class CompanyController {
         String companyName = utils.parsJwt(token);
         Gym savedGym = companyService.createNewGym(newGym, companyName);
         return new ResponseEntity<>(savedGym, HttpStatus.OK);
+    }
+
+    @GetMapping("/gym")
+    public ResponseEntity<Object> getOneGym(@RequestParam(value = "id", required = true) Long id, @RequestHeader("authorization") String token) {
+        Gym gym = companyService.findGymById(id);
+        if (gym == null) {
+            return new ResponseEntity<>("Gym not found", HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(gym, HttpStatus.OK);
+    }
+
+    @GetMapping("/gyms")
+    public ResponseEntity<Object> getAllGymsOfCompany(@RequestHeader("authorization") String token) {
+        ArrayList<Gym> gyms = companyService.getAllGyms(utils.parsJwt(token));
+        return gyms != null ? new ResponseEntity<>(gyms, HttpStatus.OK) : new ResponseEntity<>("No gyms", HttpStatus.CONFLICT);
     }
 }
