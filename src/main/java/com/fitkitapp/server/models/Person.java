@@ -1,6 +1,8 @@
 package com.fitkitapp.server.models;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fitkitapp.server.util.FitKitAppConstants;
+import com.fitkitapp.server.util.GymConverter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -45,6 +47,7 @@ public abstract class Person implements Serializable {
     @Column(name = "AVATAR")
     private String avatar;
     @ManyToOne
+    @JsonSerialize(converter = GymConverter.class)
     private Gym gym;
 
     public Person() {

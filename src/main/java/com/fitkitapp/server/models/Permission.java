@@ -6,6 +6,7 @@ import java.io.Serializable;
 /**
  * Created on 10.07.2017.
  * <p>Permissions class</p>
+ *
  * @author boris
  */
 @Entity
@@ -16,24 +17,24 @@ public class Permission implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Boolean viewPost;
-    private Boolean createPost;
-    private Boolean removePost;
-    private Boolean sendPostToClient;
-    private Boolean CRUDClient;
-    private Boolean CRUDAbonnements;
-    private Boolean viewEmployees;
-    private Boolean CRUDEmployees;
-    private Boolean createRoleForEmployees;
-    private Boolean createSpecializationForEmployees;
-    private Boolean viewExercises;
-    private Boolean CRUDExercises;
-    private Boolean viewCategory;
-    private Boolean CRUDCategory;
-    private Boolean viewWorkouts;
-    private Boolean CRUDWorkouts;
-    private Boolean sendPersonalWorkoutToClients;
-    private Boolean sendStandardWorkoutToClients;
+    private Boolean viewPost = false;
+    private Boolean createPost = false;
+    private Boolean removePost = false;
+    private Boolean sendPostToClient = false;
+    private Boolean CRUDClient = false;
+    private Boolean CRUDAbonnements = false;
+    private Boolean viewEmployees = false;
+    private Boolean CRUDEmployees = false;
+    private Boolean createRoleForEmployees = false;
+    private Boolean createSpecializationForEmployees = false;
+    private Boolean viewExercises = false;
+    private Boolean CRUDExercises = false;
+    private Boolean viewCategory = false;
+    private Boolean CRUDCategory = false;
+    private Boolean viewWorkouts = false;
+    private Boolean CRUDWorkouts = false;
+    private Boolean sendPersonalWorkoutToClients = false;
+    private Boolean sendStandardWorkoutToClients = false;
 
     public Permission() {
     }

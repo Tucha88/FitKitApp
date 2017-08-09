@@ -48,7 +48,7 @@ public class Gym implements Serializable, Comparable<Gym> {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "company", referencedColumnName = "ID")
-    @JsonSerialize(converter = CompanyConverner.class)
+    @JsonSerialize(converter = CompanyConverter.class)
     private Company company;
 
 
@@ -144,5 +144,13 @@ public class Gym implements Serializable, Comparable<Gym> {
     @Override
     public int compareTo(Gym o) {
         return o.getId() == this.getId() ? 0 : 1;
+    }
+
+    public void addEmployee(Employees employees) {
+        this.employees.add(employees);
+    }
+
+    public void addPost(Post post) {
+        posts.add(post);
     }
 }

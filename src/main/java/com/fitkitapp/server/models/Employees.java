@@ -1,5 +1,8 @@
 package com.fitkitapp.server.models;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fitkitapp.server.util.ListClientConverter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,29 +23,24 @@ public class Employees extends Person implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Role role;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Permission permissions;
     @OneToMany(cascade = CascadeType.ALL)
-    private Collection<Permission> permissions = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.ALL)
+    @JsonSerialize(converter = ListClientConverter.class)
     private Collection<Client> clients = new ArrayList<>();
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Specialization specialization;
     private String aboutMe;
 
     public Employees() {
     }
 
-    public Employees(Role role, Collection<Permission> permissions, Collection<Client> clients, Specialization specialization, String aboutMe) {
+    public Employees(String firstName, String lastName, Gender gender, String login, String password,
+                     String email, String phoneNumber, Date dateOfBirth, String avatar, Gym gym, Role role,
+                     Permission permissions, Collection<Client> clients, Specialization specialization, String aboutMe) {
 
-        this.role = role;
-        this.permissions = permissions;
-        this.clients = clients;
-        this.specialization = specialization;
-        this.aboutMe = aboutMe;
-    }
-
-    public Employees(String firstName, String lastName, Gender gender, String login, String password, String email, String phoneNumber, Date dateOfBirth, String avatar, Gym gym, Role role, Collection<Permission> permissions, Collection<Client> clients, Specialization specialization, String aboutMe) {
         super(firstName, lastName, gender, login, password, email, phoneNumber, dateOfBirth, avatar, gym);
         this.role = role;
         this.permissions = permissions;
@@ -52,7 +50,6 @@ public class Employees extends Person implements Serializable {
     }
 
     public Long getId() {
-
         return id;
     }
 
@@ -68,11 +65,11 @@ public class Employees extends Person implements Serializable {
         this.role = role;
     }
 
-    public Collection<Permission> getPermissions() {
+    public Permission getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(Collection<Permission> permissions) {
+    public void setPermissions(Permission permissions) {
         this.permissions = permissions;
     }
 

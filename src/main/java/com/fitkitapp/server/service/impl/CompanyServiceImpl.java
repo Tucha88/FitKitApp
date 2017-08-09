@@ -1,7 +1,6 @@
 package com.fitkitapp.server.service.impl;
 
-import com.fitkitapp.server.models.Company;
-import com.fitkitapp.server.models.Gym;
+import com.fitkitapp.server.models.*;
 import com.fitkitapp.server.repository.CompanyRepo;
 import com.fitkitapp.server.repository.GymRepo;
 import com.fitkitapp.server.service.CompanyService;
@@ -55,16 +54,13 @@ public class CompanyServiceImpl implements CompanyService {
             return null;
         }
         companyFind.addGym(gym);
-/*
         gym.setCompany(companyFind);
-*/
         companyRepo.saveAndFlush(companyFind);
         return gym;
     }
 
     @Override
     public Gym findGymById(Long id) {
-
         return gymRepo.findGymById(id);
     }
 
@@ -73,5 +69,23 @@ public class CompanyServiceImpl implements CompanyService {
         ArrayList<Gym> gyms = new ArrayList<>();
         gyms.addAll(companyRepo.findByCompanyName(companyName).getGyms());
         return gyms;
+    }
+
+    @Override
+    public boolean addAdministratorToGym(String token, Long gymId, Employees employees) {
+        Company company = companyRepo.findByCompanyName(utils.parsJwt(token));
+        Gym gym = gymRepo.findGymById(gymId);
+        if (gym.getCompany().getId() == company.getId()) {
+            employees.setRole(new Role("Super Admin"));
+            Permission permission = new Permission(true, true, true, true, true, true, true, true, true, true
+                    , true, true, true, true, true, true, true, true);
+
+            employees.setPermissions(permission);
+            gym.addEmployee(employees);
+            employees.setGym(gym);
+            gymRepo.saveAndFlush(gym);
+            return true;
+        }
+        return false;
     }
 }

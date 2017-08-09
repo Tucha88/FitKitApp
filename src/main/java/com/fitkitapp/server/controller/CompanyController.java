@@ -1,9 +1,6 @@
 package com.fitkitapp.server.controller;
 
-import com.fitkitapp.server.models.Company;
-import com.fitkitapp.server.models.FullInfo;
-import com.fitkitapp.server.models.Gym;
-import com.fitkitapp.server.models.Token;
+import com.fitkitapp.server.models.*;
 import com.fitkitapp.server.service.CompanyService;
 import com.fitkitapp.server.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +64,14 @@ public class CompanyController {
     public ResponseEntity<Object> getAllGymsOfCompany(@RequestHeader("authorization") String token) {
         ArrayList<Gym> gyms = companyService.getAllGyms(utils.parsJwt(token));
         return gyms != null ? new ResponseEntity<>(gyms, HttpStatus.OK) : new ResponseEntity<>("No gyms", HttpStatus.CONFLICT);
+    }
+
+    @PostMapping("/gym/{id}/employee")
+    public ResponseEntity<Object> addAdministratorToGym(@RequestHeader("authorization") String token,
+                                                        @PathVariable("id") Long gymId, @RequestBody Employees employees) {
+
+        return companyService.addAdministratorToGym(token, gymId, employees) ?
+                new ResponseEntity<>("Administrator added", HttpStatus.OK) :
+                new ResponseEntity<>("Already exist", HttpStatus.CONFLICT);
     }
 }

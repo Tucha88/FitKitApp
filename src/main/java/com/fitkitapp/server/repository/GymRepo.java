@@ -10,5 +10,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface GymRepo extends JpaRepository<Gym,Long>{
     Gym findGymById(Long id);
-
 }

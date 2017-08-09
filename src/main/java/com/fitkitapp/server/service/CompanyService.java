@@ -1,6 +1,7 @@
 package com.fitkitapp.server.service;
 
 import com.fitkitapp.server.models.Company;
+import com.fitkitapp.server.models.Employees;
 import com.fitkitapp.server.models.Gym;
 import org.springframework.stereotype.Service;
 
@@ -21,4 +22,5 @@ public interface CompanyService {
 
     ArrayList<Gym> getAllGyms(String companyName);
 
+    boolean addAdministratorToGym(String token, Long gymId, Employees employees);
 }
