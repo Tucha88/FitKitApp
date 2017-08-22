@@ -34,7 +34,7 @@ public class GymServiceImpl implements GymService {
     public String createPost(Post post, Long gymId, Long adminId) {
         Gym gym = gymRepo.findGymById(gymId);
         Employees employees = employeeRepo.findEmployeesById(adminId);
-        if (gym == null || employees == null || employees.getGym().getId() != gym.getId()) {
+        if (gym == null || employees == null || employees.getGym().getId().longValue() != gym.getId().longValue()) {
             return "gym/admin not found";
         }
         if (!employees.getPermissions().getCreatePost()) {
@@ -49,7 +49,7 @@ public class GymServiceImpl implements GymService {
     public String createNewEmployee(Employees employees, Long gymId, Long adminId) {
         Employees admin = employeeRepo.findEmployeesById(adminId);
         Gym gym = gymRepo.findGymById(gymId);
-        if (gym == null || admin == null || admin.getGym().getId() != gym.getId()) {
+        if (gym == null || admin == null || admin.getGym().getId().longValue() != gym.getId().longValue()) {
             return "gym/admin not found";
         }
         if (!admin.getPermissions().getCRUDEmployees()) {
@@ -69,7 +69,7 @@ public class GymServiceImpl implements GymService {
     public Object getGymInfo(Long gymId, Long adminId) {
         Gym gym = gymRepo.findGymById(gymId);
         Employees employees = employeeRepo.findEmployeesById(adminId);
-        if (gym == null || employees == null || employees.getGym().getId() != gym.getId()) {
+        if (gym == null || employees == null || employees.getGym().getId().longValue() != gym.getId().longValue()) {
             return "gym/admin not found";
         }
         return gym;

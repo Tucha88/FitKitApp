@@ -32,8 +32,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company findCompanyByEmail(String name) {
-        Company company = companyRepo.findByCompanyName(name);
-        return company;
+        return companyRepo.findByCompanyName(name);
     }
 
     @Override
@@ -75,7 +74,7 @@ public class CompanyServiceImpl implements CompanyService {
     public boolean addAdministratorToGym(String token, Long gymId, Employees employees) {
         Company company = companyRepo.findByCompanyName(utils.parsJwt(token));
         Gym gym = gymRepo.findGymById(gymId);
-        if (gym.getCompany().getId() == company.getId()) {
+        if (gym.getCompany().getId().longValue() == company.getId().longValue()) {
             employees.setRole(new Role("Super Admin"));
             Permission permission = new Permission(true, true, true, true, true, true, true, true, true, true
                     , true, true, true, true, true, true, true, true);

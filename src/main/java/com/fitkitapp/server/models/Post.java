@@ -53,27 +53,39 @@ public class Post implements Serializable {
 
     private int likes;
 
-    private String imges;
+    private String images;
+
+    private String authorImg;
+
 
     public Post() {
     }
 
     public Post(Boolean active, Boolean targetStatus, String targetIcon, Date dateOfCreation,
-                Date dateOfPublication, String title, String body, String author,
-                String externalURL, int likes, String imges, Gym gym) {
-
+                Date dateOfPublication, Gym gym,
+                String title, String body, String author, String externalURL, int likes,
+                String images, String authorImg) {
         this.active = active;
         this.targetStatus = targetStatus;
         this.targetIcon = targetIcon;
         this.dateOfCreation = dateOfCreation;
         this.dateOfPublication = dateOfPublication;
+        this.gym = gym;
         this.title = title;
         this.body = body;
         this.author = author;
         this.externalURL = externalURL;
         this.likes = likes;
-        this.imges = imges;
-        this.gym = gym;
+        this.images = images;
+        this.authorImg = authorImg;
+    }
+
+    public String getAuthorImg() {
+        return authorImg;
+    }
+
+    public void setAuthorImg(String authorImg) {
+        this.authorImg = authorImg;
     }
 
     public Long getId() {
@@ -165,12 +177,12 @@ public class Post implements Serializable {
         this.likes = likes;
     }
 
-    public String getImges() {
-        return imges;
+    public String getImages() {
+        return images;
     }
 
-    public void setImges(String imges) {
-        this.imges = imges;
+    public void setImages(String images) {
+        this.images = images;
     }
 
     public Gym getGym() {

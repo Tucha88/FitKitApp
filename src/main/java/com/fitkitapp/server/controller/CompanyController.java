@@ -52,7 +52,7 @@ public class CompanyController {
     }
 
     @GetMapping("/gym")
-    public ResponseEntity<Object> getOneGym(@RequestParam(value = "id", required = true) Long id, @RequestHeader("authorization") String token) {
+    public ResponseEntity<Object> getOneGym(@RequestParam(value = "id") Long id, @RequestHeader("authorization") String token) {
         Gym gym = companyService.findGymById(id);
         if (gym == null) {
             return new ResponseEntity<>("Gym not found", HttpStatus.CONFLICT);

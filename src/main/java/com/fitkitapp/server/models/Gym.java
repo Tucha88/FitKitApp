@@ -138,12 +138,12 @@ public class Gym implements Serializable, Comparable<Gym> {
         if (gym == null) {
             return false;
         }
-        return gym.getId() == this.getId();
+        return gym.getId().longValue() == this.getId().longValue();
     }
 
     @Override
     public int compareTo(Gym o) {
-        return o.getId() == this.getId() ? 0 : 1;
+        return o.getId().longValue() == this.getId().longValue() ? 0 : 1;
     }
 
     public void addEmployee(Employees employees) {
