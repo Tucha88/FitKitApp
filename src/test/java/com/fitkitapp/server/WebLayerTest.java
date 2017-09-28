@@ -1,11 +1,11 @@
 package com.fitkitapp.server;
 
-import com.fitkitapp.server.controller.HomeController;
+//import com.fitkitapp.server.controller.HomeController;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by Boris on 08.08.2017.
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(HomeController.class)
+//@WebMvcTest(HomeController.class)
 @AutoConfigureRestDocs(outputDir = "target/snippets")
 public class WebLayerTest {
 
