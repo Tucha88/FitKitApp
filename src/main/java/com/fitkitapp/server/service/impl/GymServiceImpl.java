@@ -9,6 +9,7 @@ import com.fitkitapp.server.repository.EmployeeRepo;
 import com.fitkitapp.server.repository.GymRepo;
 import com.fitkitapp.server.service.GymService;
 import com.fitkitapp.server.util.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by Boris on 09.08.2017.
@@ -21,6 +22,7 @@ public class GymServiceImpl implements GymService {
     private final ClientRepo clientRepo;
     private final EmployeeRepo employeeRepo;
 
+    @Autowired
     public GymServiceImpl(Utils utils, CompanyRepo companyRepo, GymRepo gymRepo,
                           ClientRepo clientRepo, EmployeeRepo employeeRepo) {
         this.utils = utils;

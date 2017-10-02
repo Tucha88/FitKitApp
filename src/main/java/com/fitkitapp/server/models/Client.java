@@ -18,7 +18,7 @@ public class Client extends Person implements Serializable {
     private static final long serialVersionUID = 2L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
     @OneToOne
     private Status status;
@@ -30,12 +30,37 @@ public class Client extends Person implements Serializable {
     private Collection<Workout> byCoachWorkout = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL)
     private Collection<Workout> standardWorkout = new ArrayList<>();
+//    @OneToOne(cascade = {CascadeType.ALL})
+//    private Account account;
 
+//    public Client(String firstName, String lastName, Gender gender, String login, String password,
+//                  String email, String phoneNumber, Date dateOfBirth, String avatar, Gym gym, Status status,
+//                  Abonnement abonnement, Collection<Workout> personalWorkout, Collection<Workout> byCoachWorkout,
+//                  Collection<Workout> standardWorkout, Account account) {
+//        super(firstName, lastName, gender, login, password, email, phoneNumber, dateOfBirth, avatar, gym);
+//        this.status = status;
+//        this.abonnement = abonnement;
+//        this.personalWorkout = personalWorkout;
+//        this.byCoachWorkout = byCoachWorkout;
+//        this.standardWorkout = standardWorkout;
+//        this.account = account;
+//    }
+
+//    public Account getAccount() {
+//
+//        return account;
+//    }
+//
+//    public void setAccount(Account account) {
+//        this.account = account;
+//    }
+//
 
     public Client() {
     }
 
-    public Client(Status status, Abonnement abonnement, Collection<Workout> personalWorkout, Collection<Workout> byCoachWorkout, Collection<Workout> standardWorkout) {
+    public Client(Status status, Abonnement abonnement, Collection<Workout> personalWorkout,
+                  Collection<Workout> byCoachWorkout, Collection<Workout> standardWorkout) {
         this.status = status;
         this.abonnement = abonnement;
         this.personalWorkout = personalWorkout;
@@ -43,7 +68,10 @@ public class Client extends Person implements Serializable {
         this.standardWorkout = standardWorkout;
     }
 
-    public Client(String firstName, String lastName, Gender gender, String login, String password, String email, String phoneNumber, Date dateOfBirth, String avatar, Gym gym, Status status, Abonnement abonnement, Collection<Workout> personalWorkout, Collection<Workout> byCoachWorkout, Collection<Workout> standardWorkout) {
+    public Client(String firstName, String lastName, Gender gender, String login, String password,
+                  String email, String phoneNumber, Date dateOfBirth, String avatar, Gym gym, Status status,
+                  Abonnement abonnement, Collection<Workout> personalWorkout, Collection<Workout> byCoachWorkout,
+                  Collection<Workout> standardWorkout) {
         super(firstName, lastName, gender, login, password, email, phoneNumber, dateOfBirth, avatar, gym);
         this.status = status;
         this.abonnement = abonnement;

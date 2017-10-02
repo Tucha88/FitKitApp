@@ -1,6 +1,7 @@
 package com.fitkitapp.server.models;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fitkitapp.server.settings.validation.UniqueEmail;
 import com.fitkitapp.server.util.FitKitAppConstants;
 import com.fitkitapp.server.util.GymConverter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,12 +30,14 @@ public abstract class Person implements Serializable {
     private Gender gender;
 
     @Column(name = "LOGIN")
+//    @UniqueUsername(message = "User already exists")
     private String login;
 
     @Column(name = "PASSWORD")
     private String password;
 
     @Column(name = "EMAIL")
+    @UniqueEmail(message = "Email already in use")
     private String email;
 
     @Column(name = "PHONE_NUMBER")
@@ -49,6 +52,8 @@ public abstract class Person implements Serializable {
     @ManyToOne
     @JsonSerialize(converter = GymConverter.class)
     private Gym gym;
+
+    private String token;
 
     public Person() {
     }
@@ -66,6 +71,23 @@ public abstract class Person implements Serializable {
         this.dateOfBirth = dateOfBirth;
         this.avatar = avatar;
         this.gym = gym;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getFirstName() {

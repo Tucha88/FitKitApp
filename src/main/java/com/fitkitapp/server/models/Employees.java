@@ -33,6 +33,21 @@ public class Employees extends Person implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Specialization specialization;
     private String aboutMe;
+    @OneToOne
+    private Account account;
+
+    public Employees(String firstName, String lastName, Gender gender, String login, String password,
+                     String email, String phoneNumber, Date dateOfBirth, String avatar, Gym gym,
+                     Role role, Permission permissions, Collection<Client> clients,
+                     Specialization specialization, String aboutMe, Account account) {
+        super(firstName, lastName, gender, login, password, email, phoneNumber, dateOfBirth, avatar, gym);
+        this.role = role;
+        this.permissions = permissions;
+        this.clients = clients;
+        this.specialization = specialization;
+        this.aboutMe = aboutMe;
+        this.account = account;
+    }
 
     public Employees() {
     }
@@ -47,6 +62,15 @@ public class Employees extends Person implements Serializable {
         this.clients = clients;
         this.specialization = specialization;
         this.aboutMe = aboutMe;
+    }
+
+    public Account getAccount() {
+
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public Long getId() {
