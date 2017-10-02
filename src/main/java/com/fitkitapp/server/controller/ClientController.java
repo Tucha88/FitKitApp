@@ -46,4 +46,9 @@ public class ClientController {
         }
         return new ResponseEntity<>("{\"token\":" + "\"" + token + "\"}", HttpStatus.OK);
     }
+
+    @GetMapping("user")
+    public ResponseEntity<Object> getUser(@RequestHeader("Authorization") String s) {
+        return new ResponseEntity<Object>(clientService.getUser(s), HttpStatus.OK);
+    }
 }

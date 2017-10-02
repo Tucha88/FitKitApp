@@ -53,4 +53,10 @@ public class ClientServiceImpl implements ClientService {
         clientRepo.save(client1);
         return client.getToken();
     }
+
+    @Override
+    public Object getUser(String s) {
+        return clientRepo.findByEmail(utils.parsJwt(s));
+    }
+
 }

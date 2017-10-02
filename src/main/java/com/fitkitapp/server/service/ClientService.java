@@ -10,4 +10,6 @@ public interface ClientService {
     Object registerNewClient(Client client);
 
     String loginClient(Client client);
+
+    Object getUser(String s);
 }
