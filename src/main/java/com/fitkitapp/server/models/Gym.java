@@ -1,7 +1,7 @@
 package com.fitkitapp.server.models;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fitkitapp.server.util.*;
+import com.fitkitapp.server.util.converters.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -37,7 +37,7 @@ public class Gym implements Serializable, Comparable<Gym> {
     private Collection<Abonnement> abonnements = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonSerialize(converter = ListPostsConvernter.class)
+    @JsonSerialize(converter = ListPostsConverter.class)
     private Collection<Post> posts = new ArrayList<>();
 
     @ManyToOne(cascade = {CascadeType.ALL})

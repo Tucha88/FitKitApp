@@ -34,6 +34,7 @@ public class Workout implements Serializable {
 
 //    @OneToMany
 //    @MapKeyJoinColumn(name = "EXERCISES_ID")
+//    @JsonSerialize(converter = ExerciseMapConverter.class)
 //    private Map<Exercise, SRWD> exerciseMap = new HashMap<>();
 
     public Workout() {

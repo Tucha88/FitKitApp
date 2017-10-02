@@ -1,4 +1,4 @@
-package com.fitkitapp.server.util;
+package com.fitkitapp.server.util.converters;
 
 import com.fasterxml.jackson.databind.util.StdConverter;
 import com.fitkitapp.server.models.Post;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Boris on 06.08.2017.
  */
-public class ListPostsConvernter extends StdConverter<List<Post>, List<Long>> {
+public class ListPostsConverter extends StdConverter<List<Post>, List<Long>> {
     @Override
     public List<Long> convert(List<Post> posts) {
         return posts.stream().map(Post::getId).collect(Collectors.toList());

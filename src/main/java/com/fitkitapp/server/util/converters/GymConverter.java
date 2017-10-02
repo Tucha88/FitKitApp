@@ -1,4 +1,4 @@
-package com.fitkitapp.server.util;
+package com.fitkitapp.server.util.converters;
 
 import com.fasterxml.jackson.databind.util.StdConverter;
 import com.fitkitapp.server.models.Gym;

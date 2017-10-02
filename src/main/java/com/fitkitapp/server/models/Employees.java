@@ -1,7 +1,7 @@
 package com.fitkitapp.server.models;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fitkitapp.server.util.ListClientConverter;
+import com.fitkitapp.server.util.converters.ListClientConverter;
 
 import javax.persistence.*;
 import java.io.Serializable;

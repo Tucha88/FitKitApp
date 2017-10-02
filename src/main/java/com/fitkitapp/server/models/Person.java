@@ -3,7 +3,7 @@ package com.fitkitapp.server.models;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fitkitapp.server.settings.validation.UniqueEmail;
 import com.fitkitapp.server.util.FitKitAppConstants;
-import com.fitkitapp.server.util.GymConverter;
+import com.fitkitapp.server.util.converters.GymConverter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

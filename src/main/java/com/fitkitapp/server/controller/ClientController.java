@@ -35,7 +35,7 @@ public class ClientController {
         if (errors.hasErrors()) {
             throw new InvalidRequestException("Username already exists", errors);
         }
-        return new ResponseEntity<Object>(clientService.registerNewClient(client), HttpStatus.OK);
+        return new ResponseEntity<Object>("{\"token\":" + "\"" + clientService.registerNewClient(client) + "\"}", HttpStatus.OK);
     }
 
     @PostMapping("/login")
@@ -44,6 +44,6 @@ public class ClientController {
         if (token == null) {
             return new ResponseEntity<Object>("Wrong login or password", HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(token, HttpStatus.OK);
+        return new ResponseEntity<>("{\"token\":" + "\"" + token + "\"}", HttpStatus.OK);
     }
 }

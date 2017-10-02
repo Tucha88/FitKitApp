@@ -1,6 +1,9 @@
 package com.fitkitapp.server.models;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fitkitapp.server.util.WorkoutConverter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,6 +27,7 @@ public class Exercise implements Serializable, Comparable<Exercise> {
     private String category;
     private ArrayList<String> images = new ArrayList<>();
     @ManyToOne
+    @JsonSerialize(converter = WorkoutConverter.class)
     private Workout owner;
 
     public Exercise() {
